@@ -1,0 +1,24 @@
+<% include partials/header %>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-10 col-md-8 m-auto">
+            <h1 class="text-center">Ajouter un nouveau fournisseur</h1>
+            <form method="POST" action="/fournisseurs">
+                <div class="form-group">
+                <label for="nom">Nom du fournisseur</label>
+                <input type="text" class="form-control" id="nom" name="nom" placeholder="Entrez le nom du fournisseur">
+                </div>
+                <div class="form-group">
+                <label for="image">Image du fournisseur</label>
+                <input type="text" class="form-control" id="image" name="image" placeholder="Entrez l'url de l'image du fournisseur">
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Ajouter</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<% include partials/footer %>

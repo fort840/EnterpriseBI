@@ -1,0 +1,21 @@
+<% include partials/header %>
+                <a class="btn btn-primary btn-lg" href="/newFournisseur" role="button">Ajouter un nouveau fournisseur</a>
+            </div>
+        </div>
+<div class="container">
+    <h1>Liste des fournisseurs</h1>
+    <div class="container m-auto"></div>
+        <div class="row">
+    <% fournisseurs.forEach(function(fournisseur) { %>
+            <div class="col-md-3">
+                <figure class="figure">
+                    <img src="<%= fournisseur.image %>" class="figure-img img-fluid img-thumbnail" alt="">
+                    <figcaption class="figure-caption"><h6><%= fournisseur.nom %></h6></figcaption>
+                </figure>
+            </div>
+    <% }); %>
+        </div>
+    </div>
+</div>
+
+<% include partials/footer %>
