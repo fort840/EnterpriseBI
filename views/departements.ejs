@@ -1,0 +1,19 @@
+<% include partials/header %>
+                <a class="btn btn-primary btn-lg" href="/departements/new" role="button">Ajouter un nouveau Département</a>
+            </div>
+        </div>
+        <div class="container m-auto">
+            <h1>Liste des départements couverts</h1>
+            <div class="row">
+                <% departements.forEach(function(departement) { %>
+                    <div class="col-md-3">
+                        <figure class="figure img-thumbnail">
+                            <img src="<%= departement.image %>" class="figure-img img-fluid" alt="">
+                            <figcaption class="figure-caption"><h6><%= departement.nom %></h6></figcaption>
+                        </figure>
+                    </div>
+                <% }); %>
+            </div>
+        </div>
+
+<% include partials/footer %>

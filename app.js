@@ -12,6 +12,12 @@ for (var i = 0; i < 5; i++) {
     fournisseurs.push(fournisseur);
 }
 
+var departements = [
+    {nom : "Lékié", image : faker.image.city()},
+    {nom : "Mfoundi", image : faker.image.city()},
+    {nom : "Haut-Nkam", image : faker.image.city()}
+];
+
 app.use(bodyParser.urlencoded({extended : true}));
 app.use(express.static("public"));
 app.set("view engine", "ejs");
@@ -35,6 +41,23 @@ app.post("/fournisseurs", function(req, res) {
 
 app.get("/fournisseurs/new", function(req, res) {
     res.render("newFournisseur");
+});
+
+app.get("/departements", function(req, res) {
+    res.render("departements", {departements : departements});
+});
+
+app.post("/departements", function(req, res) {
+    var nom = req.body.nom;
+    var image = req.body.image;
+    if (nom && image) {
+        departements.push({nom : nom, image : image});
+    }
+    res.redirect("/departements");
+});
+
+app.get("/departements/new", function(req, res) {
+    res.render("newDepartement");
 })
 
 app.get("*", function(req, res) {

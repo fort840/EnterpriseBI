@@ -1,0 +1,24 @@
+<% include partials/header %>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-10 col-md-8 m-auto">
+            <h1 class="text-center">Ajouter une nouvelle unité de mesure</h1>
+            <form method="POST" action="/measurementUnits">
+                <div class="form-group">
+                <label for="nom">Nom de l'unité de mesure</label>
+                <input type="text" class="form-control" id="nom" name="nom" placeholder="Entrez le nom de l'unité de mesure">
+                </div>
+                <div class="form-group">
+                <label for="abreviation">Abréviation</label>
+                <input type="text" class="form-control" id="abreviation" name="abreviation" placeholder="Entrez l'abréviation">
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Ajouter</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<% include partials/footer %>

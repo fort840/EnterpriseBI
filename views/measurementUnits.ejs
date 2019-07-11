@@ -3,15 +3,13 @@
             </div>
         </div>
 <div class="container m-auto">
-    <h1>Liste des fournisseurs</h1>
+    <h1>Liste des unités de mesure</h1>
     <div class="row">
         <% fournisseurs.forEach(function(fournisseur) { %>
-            <div class="col-md-3">
-                <figure class="figure img-thumbnail">
-                    <img src="<%= fournisseur.image %>" class="figure-img img-fluid" alt="">
-                    <figcaption class="figure-caption"><h6><%= fournisseur.nom %></h6></figcaption>
-                </figure>
-            </div>
+            <figure class="figure img-thumbnail col-md-3">
+                <img src="<%= fournisseur.image %>" class="figure-img img-fluid" alt="">
+                <figcaption class="figure-caption"><h6><%= fournisseur.nom %></h6></figcaption>
+            </figure>
         <% }); %>
     </div>
 </div>
