@@ -1,23 +1,23 @@
-var express = require("express");
-var app = express();
-var bodyParser = require("body-parser");
-var localhostIP = "127.0.0.1";
-var faker = require("faker");
-var mongoose = require("mongoose");
+var express     = require("express"),
+    app         = express(),
+    bodyParser  = require("body-parser"),
+    localhostIP = "127.0.0.1",
+    faker       = require("faker"),
+    mongoose = require("mongoose");
+
+app.use(bodyParser.urlencoded({extended : true}));
+app.use(express.static("public"));
+app.set("view engine", "ejs");
 
 mongoose.connect("mongodb://localhost/enterprisebi", {useNewUrlParser: true});
 console.log("Database enterpriseBI connected");
 
 var fournisseurSchema = new mongoose.Schema({
-    name: String,
+    nom: String,
     image: String
 });
 
 var Fournisseur = mongoose.model("Fournisseur", fournisseurSchema);
-
-app.use(bodyParser.urlencoded({extended : true}));
-app.use(express.static("public"));
-app.set("view engine", "ejs");
 
 app.get("/", function(req, res) {
     res.render("home");
@@ -40,7 +40,7 @@ app.post("/fournisseurs", function(req, res) {
     var image = req.body.image;
     if (nom && image) {
         Fournisseur.create({
-            name: nom,
+            nom: nom,
             image: image
         }, function(err, fournisseur) {
             if (err) {
@@ -81,4 +81,4 @@ app.get("*", function(req, res) {
 
 app.listen(process.env.PORT || 3000, process.env.IP || localhostIP, function() {
     console.log("Server EnterpriseBI is running.");
-})
+});
