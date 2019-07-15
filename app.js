@@ -3,20 +3,17 @@ var app = express();
 var bodyParser = require("body-parser");
 var localhostIP = "127.0.0.1";
 var faker = require("faker");
+var mongoose = require("mongoose");
 
-var fournisseurs = [];
-for (var i = 0; i < 5; i++) {
-    var randomName = faker.company.companyName();
-    var randomImage = faker.image.business();
-    var fournisseur = {nom : randomName, image : randomImage};
-    fournisseurs.push(fournisseur);
-}
+mongoose.connect("mongodb://localhost/enterprisebi", {useNewUrlParser: true});
+console.log("Database enterpriseBI connected");
 
-var departements = [
-    {nom : "Lékié", image : faker.image.city()},
-    {nom : "Mfoundi", image : faker.image.city()},
-    {nom : "Haut-Nkam", image : faker.image.city()}
-];
+var fournisseurSchema = new mongoose.Schema({
+    name: String,
+    image: String
+});
+
+var Fournisseur = mongoose.model("Fournisseur", fournisseurSchema);
 
 app.use(bodyParser.urlencoded({extended : true}));
 app.use(express.static("public"));
@@ -27,14 +24,32 @@ app.get("/", function(req, res) {
 });
 
 app.get("/fournisseurs", function(req, res) {
-    res.render("fournisseurs", {fournisseurs : fournisseurs});
+    Fournisseur.find({}, function(err, fournisseurs) {
+        if (err) {
+            console.log("Erreur : " + err);
+        }
+        else {
+            console.log(fournisseurs);
+            res.render("fournisseurs", {fournisseurs : fournisseurs});
+        }
+    });
 });
 
 app.post("/fournisseurs", function(req, res) {
     var nom = req.body.nom;
     var image = req.body.image;
     if (nom && image) {
-        fournisseurs.push({nom : nom, image : image});
+        Fournisseur.create({
+            name: nom,
+            image: image
+        }, function(err, fournisseur) {
+            if (err) {
+                console.log("Erreur : " + err);
+            }
+            else {
+                console.log(fournisseur);
+            }
+        });
     }
     res.redirect("/fournisseurs");
 });
